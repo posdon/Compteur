@@ -1,19 +1,30 @@
 package model;
 
-public class Scenario {
+public class Player {
 
-	public String name;
+	private String name;
+	private int ID;
 	
-	public Scenario(String name) {
+	public Player(String name, int iD) {
+		super();
 		this.name = name;
+		ID = iD;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public void setID(int iD) {
+		ID = iD;
 	}
 
 	@Override
@@ -24,13 +35,11 @@ public class Scenario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Scenario other = (Scenario) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		Player other = (Player) obj;
+		if (ID != other.ID)
 			return false;
 		return true;
 	}
-		
+	
+	
 }
