@@ -14,8 +14,9 @@ public class ScenarioBuilder {
 		return name;
 	}
 
-	public void setName(String name) {
+	public ScenarioBuilder setName(String name) {
 		this.name = name;
+		return this;
 	}
 	
 	public Scenario build() throws NullOrEmptyException {
