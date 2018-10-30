@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import model.exception.NameAlreadyExistException;
 import model.exception.NullOrEmptyException;
@@ -45,13 +46,14 @@ public class ScenarioManager {
 		String name = scenario.getName();
 		if(scenarios.containsKey(name)) throw new NameAlreadyExistException(name);
 		scenarios.put(name, scenario);
+		scenariosUnderconstruction.remove(index);
 	}
 	
 	public int getUnderconstructionSize() {
 		return scenariosUnderconstruction.size();
 	}
 	
-	public int getScenarioSize() {
-		return scenarios.size();
+	public Set<String> getScenarioKeySet() {
+		return scenarios.keySet();
 	}
 }

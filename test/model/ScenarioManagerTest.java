@@ -16,6 +16,7 @@ class ScenarioManagerTest {
 	private final String NAME_CLASSIC = "classic";
 	private final String NAME_DOUBLE = "double";
 	private final String NAME_EMPTY = "";
+	private final String NAME_COMPTEUR = "compteur";
 	
 	@Test
 	public void testSingleton() {
@@ -88,6 +89,28 @@ class ScenarioManagerTest {
 			fail();
 		} catch (NullOrEmptyException e) {
 		}
+	}
+	
+	@Test
+	public void testCompteur() {
+		try {
+			int beforeCreationUnderconstruction = scenarioManager.getUnderconstructionSize();
+			int beforeCreationScenario = scenarioManager.getScenarioKeySet().size();
+			scenarioManager.newCreation();
+			int duringCreationUnderconstruction = scenarioManager.getUnderconstructionSize();
+			int duringCreationScenario = scenarioManager.getScenarioKeySet().size();
+			ScenarioBuilder scenarioBuilder = scenarioManager.getScenarioUnderconstruction(beforeCreationUnderconstruction);
+			scenarioBuilder.setName(NAME_COMPTEUR);
+			scenarioManager.endCreation(beforeCreationUnderconstruction);
+			int afterCreationUnderconstruction = scenarioManager.getUnderconstructionSize();
+			int afterCreationScenario = scenarioManager.getScenarioKeySet().size();
+			assertEquals(beforeCreationUnderconstruction, afterCreationUnderconstruction);
+			assertEquals(beforeCreationScenario, duringCreationScenario);
+			assertEquals(duringCreationScenario+1, afterCreationScenario);
+			assertEquals(beforeCreationUnderconstruction+1, duringCreationUnderconstruction);
+		} catch(NullOrEmptyException |OutOfBoundException | NameAlreadyExistException e) {
+			fail();
+		} 
 	}
 }
 
