@@ -49,7 +49,8 @@ public class CompteurBotDiscord implements Runnable {
 	
 	public void stop() {
 		LOG.info("Bot Compteur will stop soon...");
-		
+		scanner.close();
+		jda.shutdown();
 		LOG.info("Bot Compteur shut down.");
 	}
 	
