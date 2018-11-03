@@ -32,10 +32,19 @@
   		<artifactId>JDA</artifactId>
   		<version>3.8.1_439</version>
   	</dependency>
+  	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-simple</artifactId>
+	    <version>1.7.25</version>
+	</dependency>
+  	
   </dependencies>
-  <repositories><repository>
-    <id>jcenter</id>
-    <name>jcenter-bintray</name>
-    <url>http://jcenter.bintray.com</url>
-</repository></repositories>
+  <repositories>
+	  <repository>
+	    <id>jcenter</id>
+	    <name>jcenter-bintray</name>
+	    <url>http://jcenter.bintray.com</url>
+	  </repository>
+  </repositories>
 </project>
