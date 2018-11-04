@@ -1,4 +1,4 @@
-package bot;
+package bot.compteur;
 
 
 
@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
 
+import bot.command.CommandMap;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -22,7 +23,10 @@ public class CompteurBotDiscord implements Runnable {
 	
 	public CompteurBotDiscord(String token) {
 		this.token = token;
-		
+	}
+	
+	public JDA getJDA() {
+		return jda;
 	}
 	
 	@Override
@@ -44,11 +48,13 @@ public class CompteurBotDiscord implements Runnable {
 		LOG.info("Bot Compteur starting...");
 		running = true;
 		jda = new JDABuilder(AccountType.BOT).setToken(token).build();
+		jda.addEventListener(new CompteurListener(this));
 		LOG.info("Bot Compteur started with the token '"+token+"'");
 	}
 	
 	public void stop() {
 		LOG.info("Bot Compteur will stop soon...");
+		CommandMap.getCommandMap(this).remove(this);
 		scanner.close();
 		jda.shutdown();
 		LOG.info("Bot Compteur shut down.");

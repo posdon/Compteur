@@ -1,4 +1,4 @@
-package bot;
+package bot.compteur;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

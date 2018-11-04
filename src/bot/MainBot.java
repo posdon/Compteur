@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import bot.compteur.CompteurBotDiscord;
+
 public class MainBot {
 	
 	private static Properties conf;
