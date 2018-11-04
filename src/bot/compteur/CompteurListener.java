@@ -29,4 +29,8 @@ public class CompteurListener implements EventListener {
 		}
 	}
 	
+	public void onConsole(String message) {
+		commandMap.commandConsole(message);
+	}
+	
 }
