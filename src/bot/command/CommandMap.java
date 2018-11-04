@@ -20,7 +20,7 @@ import net.dv8tion.jda.core.entities.User;
 
 public class CommandMap {
 
-	private static Map<CompteurBotDiscord,CommandMap> INSTANCE; 
+	private static CommandMap INSTANCE = null; 
 	private final Map<String, CommandBean> commands = new HashMap<>();
 	private final String tag = "!";
 	private CompteurLogger LOG = CompteurLogger.getLogger(this.getClass().getName());
@@ -31,8 +31,8 @@ public class CommandMap {
 	}
 	
 	public static CommandMap getCommandMap(CompteurBotDiscord compteurBotDiscord) {
-		if(!INSTANCE.keySet().contains(compteurBotDiscord))  INSTANCE.put(compteurBotDiscord,new CommandMap(compteurBotDiscord));
-		return INSTANCE.get(compteurBotDiscord);
+		if(INSTANCE == null)  INSTANCE = new CommandMap(compteurBotDiscord);
+		return INSTANCE;
 	}
    
     public String getTag() {
