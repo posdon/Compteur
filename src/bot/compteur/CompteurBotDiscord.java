@@ -50,7 +50,7 @@ public class CompteurBotDiscord implements Runnable {
 		LOG.info("Bot Compteur starting...");
 		running = true;
 		jda = new JDABuilder(AccountType.BOT).setToken(token).build();
-		jda.addEventListener();
+		jda.addEventListener(compteurListener);
 		LOG.info("Bot Compteur started with the token '"+token+"'");
 	}
 	
