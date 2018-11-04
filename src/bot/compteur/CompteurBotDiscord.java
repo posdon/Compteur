@@ -54,7 +54,6 @@ public class CompteurBotDiscord implements Runnable {
 	
 	public void stop() {
 		LOG.info("Bot Compteur will stop soon...");
-		CommandMap.getCommandMap(this).remove(this);
 		scanner.close();
 		jda.shutdown();
 		LOG.info("Bot Compteur shut down.");
