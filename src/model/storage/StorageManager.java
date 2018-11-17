@@ -39,7 +39,7 @@ public class StorageManager {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String convertScenarioToJson(Scenario scenario) {
+	private String convertScenarioToJson(Scenario scenario) {
 		JSONObject result = new JSONObject();
 		result.put("name", scenario.getName());
 		return result.toString();
