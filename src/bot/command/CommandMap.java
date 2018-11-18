@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import bot.command.compteur.BasicCommands;
+import bot.command.compteur.CompteurCommands;
 import bot.compteur.CompteurBotDiscord;
 import bot.compteur.CompteurLogger;
 import net.dv8tion.jda.core.JDA;
@@ -30,6 +31,7 @@ public class CommandMap {
 	private CommandMap(CompteurBotDiscord compteurBotDiscord) {
 		this.compteurBotDiscord = compteurBotDiscord;
 		registerCommand(new BasicCommands(this.compteurBotDiscord));
+		registerCommand(new CompteurCommands(compteurBotDiscord));
 	}
 	
 	public static CommandMap getCommandMap(CompteurBotDiscord compteurBotDiscord) {

@@ -8,8 +8,6 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 public class BasicCommands {
 
 	private final CompteurBotDiscord compteurBotDiscord;
-	private final String helperMessage = "Compteur v1.0.0 command's list :\n"
-			+"- !help : Show you the helper.";
 	
 	public BasicCommands(CompteurBotDiscord compteurBotDiscord) {
 		this.compteurBotDiscord = compteurBotDiscord;
@@ -20,12 +18,7 @@ public class BasicCommands {
 		this.compteurBotDiscord.setRunning(false);
 	}
 	
-	@Command(name="help", description="Print the helper", type=ExecutorType.USER)
-	public void showHelper(MessageChannel channel) {
-		sendMessage(helperMessage, channel);
-	}
-	
-	private void sendMessage(String message, MessageChannel channel) {
+	protected void sendMessage(String message, MessageChannel channel) {
 		if(message == null || "".equals(message)) return;
 		channel.sendMessage(message).complete();
 	}
