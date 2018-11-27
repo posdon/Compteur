@@ -26,7 +26,7 @@ class ScenarioManagerTest {
 	}
 	
 	@Test
-	public void creationClassic() {
+	public void testCreationClassic() {
 		try {
 			int deltaUnderconstruction = scenarioManager.getUnderconstructionSize();
 			scenarioManager.newCreation();
@@ -42,7 +42,7 @@ class ScenarioManagerTest {
 	}
 	
 	@Test
-	public void creationDouble() {
+	public void testCreationDouble() {
 		int deltaUnderconstruction = scenarioManager.getUnderconstructionSize();
 		try {
 			scenarioManager.newCreation();
