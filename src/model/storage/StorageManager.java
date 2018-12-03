@@ -38,6 +38,15 @@ public class StorageManager {
 	private StorageManager() {
 	}
 	
+	/**
+	 * Transform a scenario into json like this :
+	 * {
+	 * 	name:scenario.name;
+	 * }
+	 * 
+	 * @param scenario
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	private String convertScenarioToJson(Scenario scenario) {
 		JSONObject result = new JSONObject();
@@ -45,6 +54,15 @@ public class StorageManager {
 		return result.toString();
 	}
 	
+	/**
+	 * Generate a scenario from a json text.
+	 * @param jsonFile
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws OutOfBoundException
+	 * @throws NullOrEmptyException
+	 * @throws NameAlreadyExistException
+	 */
 	public void addFileToManager(File jsonFile) throws IOException, ParseException, OutOfBoundException, NullOrEmptyException, NameAlreadyExistException {
 		int indiceScenario = scenarioManager.getUnderconstructionSize();
 		scenarioManager.newCreation();
@@ -58,7 +76,7 @@ public class StorageManager {
 		scenarioManager.endCreation(indiceScenario);
 	}
 
-	public String readFile(File jsonFile) throws IOException {
+	private String readFile(File jsonFile) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(jsonFile));
 		String fileContent = "";
 		String currentLine = reader.readLine();
@@ -70,6 +88,9 @@ public class StorageManager {
 		return fileContent;
 	}
 	
+	/**
+	 * Load all json file as scenarios.
+	 */
 	public void addAllFileToManager() {
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(Constante.SAVE_FILE_EXTENSION) && fileEntry.canRead()) {
@@ -82,6 +103,11 @@ public class StorageManager {
 	    }
 	}
 	
+	/**
+	 * Save given scenario into one file named : scenario.name.
+	 * @param scenario
+	 * @throws IOException
+	 */
 	public void saveScenarioAsFile(Scenario scenario) throws IOException {
 		String scenarioJSON = convertScenarioToJson(scenario);
 		File file = new File(Constante.STORAGE_PATH+"/"+scenario.getName()+Constante.SAVE_FILE_EXTENSION);
@@ -91,6 +117,9 @@ public class StorageManager {
 		writer.close();
 	}
 	
+	/**
+	 * Save all scenario created into files.
+	 */
 	public void saveAllScenarioAsFile() {
 		Set<String> scenariosName = scenarioManager.getScenarioKeySet();
 		for(String scenarioName : scenariosName) {
