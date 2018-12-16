@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import model.Scenario;
 import model.ScenarioBuilder;
 import model.ScenarioManager;
+import model.exception.HostAlreadyHostingException;
 import model.exception.NameAlreadyExistException;
 import model.exception.NullOrEmptyException;
 import model.exception.OutOfBoundException;
@@ -123,10 +124,10 @@ public class StorageManager {
 	public void saveAllScenarioAsFile() {
 		Set<String> scenariosName = scenarioManager.getScenarioKeySet();
 		for(String scenarioName : scenariosName) {
-			Scenario scenario = scenarioManager.getScenario(scenarioName);
 			try {
+				Scenario scenario = scenarioManager.getScenario(scenarioName);
 				saveScenarioAsFile(scenario);
-			} catch (IOException e) {
+			} catch (IOException | HostAlreadyHostingException e) {
 				logger.info("Save failure for "+scenarioName);
 			}
 		}

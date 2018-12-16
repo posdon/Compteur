@@ -69,6 +69,13 @@ public class ScenarioManager {
 		scenariosRunning.put(host, scenarioIG);
 	}
 	
+	
+	public void startGame(String host) throws HostAlreadyHostingException, IllegalGameStateException {
+		if(!scenariosRunning.containsKey(host)) throw new HostAlreadyHostingException(host, false);
+		ScenarioIG scenarioIG = scenariosRunning.get(host);
+		scenarioIG.start();
+	}
+	
 	/**
 	 * End a game instance.
 	 * @param host
@@ -78,7 +85,7 @@ public class ScenarioManager {
 	public void endGame(String host) throws HostAlreadyHostingException, IllegalGameStateException {
 		if(!scenariosRunning.containsKey(host)) throw new HostAlreadyHostingException(host, false);
 		ScenarioIG scenarioIG = scenariosRunning.get(host);
-		if(!GameState.ENDED.equals(scenarioIG.getState())) throw new IllegalGameStateException(GameState.ENDED, scenarioIG.getState());
+		scenarioIG.end();
 		scenariosRunning.remove(host);
 	}
 
@@ -97,8 +104,10 @@ public class ScenarioManager {
 	 * Get a specific scenario.
 	 * @param name
 	 * @return
+	 * @throws HostAlreadyHostingException 
 	 */
-	public Scenario getScenario(String name) {
+	public Scenario getScenario(String name) throws HostAlreadyHostingException {
+		if(!scenarios.containsKey(name)) throw new HostAlreadyHostingException(name, false);
 		return scenarios.get(name);
 	}
 	

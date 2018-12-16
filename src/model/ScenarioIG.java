@@ -16,13 +16,23 @@ public class ScenarioIG {
 		return scenario;
 	}
 	
-	public void start() throws IllegalGameStateException {
-		if(!GameState.BEFORE_START.equals(this.state)) throw new IllegalGameStateException(GameState.BEFORE_START, this.state);
-		this.state = GameState.RUNNING;
+	public boolean isReady() {
+		boolean stateIsOkay = GameState.BEFORE_START.equals(this.state);
+		return stateIsOkay;
 	}
 	
+	public boolean isEndable() {
+		boolean stateIsOkay = GameState.RUNNING.equals(this.state);
+		return stateIsOkay;
+	}
+	
+	public void start() throws IllegalGameStateException {
+		if(!isReady()) throw new IllegalGameStateException(true);
+		this.state = GameState.RUNNING;
+	}
+
 	public void end() throws IllegalGameStateException {
-		if(!GameState.RUNNING.equals(this.state)) throw new IllegalGameStateException(GameState.RUNNING, this.state);
+		if(!isEndable()) throw new IllegalGameStateException(false);
 		this.state = GameState.ENDED;
 	}
 	

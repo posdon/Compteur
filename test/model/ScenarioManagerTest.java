@@ -49,7 +49,7 @@ class ScenarioManagerTest {
 			Scenario scenarioBuilt = scenarioBuilder.build();
 			Scenario scenarioInManager = scenarioManager.getScenario(NAME_CREATION_CLASSIC);
 			assertEquals(scenarioBuilt, scenarioInManager);
-		}catch(OutOfBoundException | NameAlreadyExistException | NullOrEmptyException e) {
+		}catch(OutOfBoundException | NameAlreadyExistException | NullOrEmptyException | HostAlreadyHostingException e) {
 			fail();
 		}
 	}
