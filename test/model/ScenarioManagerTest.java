@@ -154,9 +154,8 @@ class ScenarioManagerTest {
 			scenarioManager.newGame(NAME_HOSTER_COMPTEUR, NAME_COMPTEUR);
 			int beforeUnderconstruction = scenarioManager.getUnderconstructionSize();
 			int beforeScenario = scenarioManager.getScenarioKeySet().size();
-			int beforeGame = scenarioManager.getScenarioRunningKeySet().size();
-			scenarioManager.getScenarioIG(NAME_HOSTER_COMPTEUR).start();
-			scenarioManager.getScenarioIG(NAME_HOSTER_COMPTEUR).end();			
+			int beforeGame = scenarioManager.getScenarioRunningKeySet().size();	
+			scenarioManager.startGame(NAME_HOSTER_COMPTEUR);
 			scenarioManager.endGame(NAME_HOSTER_COMPTEUR);
 			int afterUnderconstruction = scenarioManager.getUnderconstructionSize();
 			int afterScenario = scenarioManager.getScenarioKeySet().size();

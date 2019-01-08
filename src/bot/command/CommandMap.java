@@ -77,7 +77,7 @@ public class CommandMap {
         }
         
         try{
-            execute(((CommandBean)object[0]), command, (ArrayList<String>)object[1], null);
+            execute(((CommandBean)object[0]), (ArrayList<String>)object[1], null);
         }catch(Exception exception){
             LOG.error("The method "+((CommandBean)object[0]).getMethod().getName()+" isn't correctly initialized.");
         }
@@ -96,7 +96,7 @@ public class CommandMap {
         	return ;
         }
         try{
-            execute(((CommandBean)object[0]), command,(ArrayList<String>)object[1], message);
+            execute(((CommandBean)object[0]), (ArrayList<String>)object[1], message);
         }catch(Exception exception){
             LOG.error("The method "+((CommandBean)object[0]).getMethod().getName()+" isn't correctly initialized.");
         }
@@ -115,19 +115,23 @@ public class CommandMap {
         return new Object[]{commandBean, args};
     }
    
-    private void execute(CommandBean commandBean, String command, List<String> args, Message message) throws Exception{
+    private void execute(CommandBean commandBean, List<String> args, Message message) throws Exception{
         Parameter[] parameters = commandBean.getMethod().getParameters();
         Object[] objects = new Object[parameters.length];
+        int argsCount = 0;
         for(int i = 0; i < parameters.length; i++){
             if(parameters[i].getType() == (new ArrayList<String>()).getClass()) objects[i] = args;
             else if(parameters[i].getType() == User.class) objects[i] = message == null ? null : message.getAuthor();
             else if(parameters[i].getType() == TextChannel.class) objects[i] = message == null ? null : message.getTextChannel();
             else if(parameters[i].getType() == PrivateChannel.class) objects[i] = message == null ? null : message.getPrivateChannel();
             else if(parameters[i].getType() == Guild.class) objects[i] = message == null ? null : message.getGuild();
-            else if(parameters[i].getType() == String.class) objects[i] = command;
             else if(parameters[i].getType() == Message.class) objects[i] = message;
             else if(parameters[i].getType() == JDA.class) objects[i] = compteurBotDiscord.getJDA();
             else if(parameters[i].getType() == MessageChannel.class) objects[i] = message.getChannel();
+            else if(parameters[i].getType() == String.class) {
+            	objects[i] = (argsCount < args.size())?args.get(argsCount):"";
+            	argsCount++;
+            }
         }
         commandBean.getMethod().invoke(commandBean.getObject(), objects);
     }
